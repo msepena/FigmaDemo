@@ -23,14 +23,31 @@ final class FigmaDemoUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testTappingTopLeftCellPlacesAnX() throws {
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // XCUIAutomation Documentation
-        // https://developer.apple.com/documentation/xcuiautomation
+        let topLeftCell = app.buttons["Cell-0-0"]
+        XCTAssertTrue(
+            topLeftCell.waitForExistence(timeout: 5),
+            "Top-left board cell should be reachable by accessibility identifier"
+        )
+        // Empty cell renders no glyph, so its accessibility label is empty.
+        XCTAssertEqual(topLeftCell.label, "")
+
+        topLeftCell.tap()
+
+        // SwiftUI flattens the cell's inner Text("X") into the button's accessibility label.
+        let labelChanged = NSPredicate(format: "label == %@", "X")
+        let expectation = XCTNSPredicateExpectation(predicate: labelChanged, object: topLeftCell)
+        XCTAssertEqual(
+            XCTWaiter.wait(for: [expectation], timeout: 2),
+            .completed,
+            "Top-left cell's label should become 'X' after being tapped"
+        )
+
+        // After X moved, tapping the same cell again must be a no-op (disabled).
+        XCTAssertFalse(topLeftCell.isEnabled, "Occupied cell must be disabled")
     }
 
     @MainActor

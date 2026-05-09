@@ -1,21 +1,12 @@
-//
-//  ContentView.swift
-//  FigmaDemo
-//
-//  Created by Hema Sepena on 5/8/26.
-//
-
 import SwiftUI
+import GameFeature
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            GameScreen()
+                .toolbar(.hidden, for: .navigationBar)
         }
-        .padding()
     }
 }
 
