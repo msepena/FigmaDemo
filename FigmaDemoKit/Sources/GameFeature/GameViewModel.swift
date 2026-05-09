@@ -61,4 +61,10 @@ public final class GameViewModel {
             state = undone
         }
     }
+
+    /// Resets cumulative score, round counter, board, and history. Used by
+    /// the Settings screen's "Reset Stats" action via an app-level callback.
+    public func resetAll() {
+        state = GameState()
+    }
 }

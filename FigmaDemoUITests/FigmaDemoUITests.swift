@@ -51,6 +51,34 @@ final class FigmaDemoUITests: XCTestCase {
     }
 
     @MainActor
+    func testTappingSettingsButtonOpensSettingsScreen() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let settingsButton = app.buttons["SettingsButton"]
+        XCTAssertTrue(
+            settingsButton.waitForExistence(timeout: 5),
+            "Settings gear button should be reachable from the Game screen"
+        )
+        settingsButton.tap()
+
+        // The "‹ Game" back button is the most reliable signal that the
+        // Settings screen has been pushed.
+        let backButton = app.buttons["BackToGameButton"]
+        XCTAssertTrue(
+            backButton.waitForExistence(timeout: 3),
+            "Tapping the gear should push the Settings screen"
+        )
+
+        // Back nav returns to the Game screen.
+        backButton.tap()
+        XCTAssertTrue(
+            app.buttons["Cell-0-0"].waitForExistence(timeout: 3),
+            "Tapping ‹ Game should pop back to the Game screen"
+        )
+    }
+
+    @MainActor
     func testLaunchPerformance() throws {
         // This measures how long it takes to launch your application.
         measure(metrics: [XCTApplicationLaunchMetric()]) {

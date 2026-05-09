@@ -23,6 +23,8 @@ public enum DSColor {
     public static let turnPillTint = Color(hex: 0x007AFF).opacity(0.12)
     /// Soft empty-cell background (matches screen bg so cells "cut out" of the white card)
     public static let emptyCell = Color(hex: 0xF2F2F7)
+    /// #FF3B30 — destructive action label (Reset Stats)
+    public static let destructive = Color(hex: 0xFF3B30)
 }
 
 extension Color {

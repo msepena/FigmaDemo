@@ -86,6 +86,30 @@ struct GameViewModelTests {
         #expect(vm.state.board.isEmpty)
         #expect(vm.state.currentPlayer == .x)
     }
+
+    @Test func resetAllClearsScoreRoundAndBoard() {
+        let vm = GameViewModel()
+        // X wins round 1, then start round 2 with one move on the board.
+        vm.tapCell(at: CellPosition(row: 0, column: 0)!)
+        vm.tapCell(at: CellPosition(row: 1, column: 0)!)
+        vm.tapCell(at: CellPosition(row: 0, column: 1)!)
+        vm.tapCell(at: CellPosition(row: 1, column: 1)!)
+        vm.tapCell(at: CellPosition(row: 0, column: 2)!) // X wins
+        vm.newGame() // round 2
+        vm.tapCell(at: CellPosition(row: 2, column: 2)!)
+        #expect(vm.state.score.xWins == 1)
+        #expect(vm.state.roundNumber == 2)
+
+        vm.resetAll()
+
+        #expect(vm.state.score.xWins == 0)
+        #expect(vm.state.score.oWins == 0)
+        #expect(vm.state.score.draws == 0)
+        #expect(vm.state.roundNumber == 1)
+        #expect(vm.state.board.isEmpty)
+        #expect(vm.state.history.isEmpty)
+        #expect(vm.state.currentPlayer == .x)
+    }
 }
 
 @MainActor

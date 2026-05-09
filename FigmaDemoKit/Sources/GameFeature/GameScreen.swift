@@ -5,9 +5,14 @@ import UIComponents
 
 public struct GameScreen: View {
     @State private var viewModel: GameViewModel
+    private let onSettingsTap: () -> Void
 
-    public init(viewModel: GameViewModel = GameViewModel()) {
+    public init(
+        viewModel: GameViewModel = GameViewModel(),
+        onSettingsTap: @escaping () -> Void = {}
+    ) {
         _viewModel = State(initialValue: viewModel)
+        self.onSettingsTap = onSettingsTap
     }
 
     public var body: some View {
@@ -46,10 +51,8 @@ public struct GameScreen: View {
 
     private var header: some View {
         ScreenHeader(eyebrow: viewModel.headerEyebrow, title: "Tic Tac Toe") {
-            CircularIconButton(systemImage: "gearshape.fill") {
-                // hook up Settings navigation later
-            }
-            .accessibilityIdentifier("SettingsButton")
+            CircularIconButton(systemImage: "gearshape.fill", action: onSettingsTap)
+                .accessibilityIdentifier("SettingsButton")
         }
     }
 

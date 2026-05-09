@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A1B2C3D4E5F60003A1B2C3D4 /* GameFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F60002A1B2C3D4 /* GameFeature */; };
+		A1B2C3D4E5F60005A1B2C3D4 /* AppPreferences in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F60004A1B2C3D4 /* AppPreferences */; };
+		A1B2C3D4E5F60007A1B2C3D4 /* SettingsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F60006A1B2C3D4 /* SettingsFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1B2C3D4E5F60003A1B2C3D4 /* GameFeature in Frameworks */,
+				A1B2C3D4E5F60005A1B2C3D4 /* AppPreferences in Frameworks */,
+				A1B2C3D4E5F60007A1B2C3D4 /* SettingsFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +122,8 @@
 			name = FigmaDemo;
 			packageProductDependencies = (
 				A1B2C3D4E5F60002A1B2C3D4 /* GameFeature */,
+				A1B2C3D4E5F60004A1B2C3D4 /* AppPreferences */,
+				A1B2C3D4E5F60006A1B2C3D4 /* SettingsFeature */,
 			);
 			productName = FigmaDemo;
 			productReference = 7C38D3D62FAEAEEA004469D9 /* FigmaDemo.app */;
@@ -591,6 +597,14 @@
 		A1B2C3D4E5F60002A1B2C3D4 /* GameFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GameFeature;
+		};
+		A1B2C3D4E5F60004A1B2C3D4 /* AppPreferences */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppPreferences;
+		};
+		A1B2C3D4E5F60006A1B2C3D4 /* SettingsFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SettingsFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

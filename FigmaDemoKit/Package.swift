@@ -8,10 +8,12 @@ let package = Package(
         .macOS(.v14),
     ],
     products: [
-        .library(name: "GameDomain",   targets: ["GameDomain"]),
-        .library(name: "DesignSystem", targets: ["DesignSystem"]),
-        .library(name: "UIComponents", targets: ["UIComponents"]),
-        .library(name: "GameFeature",  targets: ["GameFeature"]),
+        .library(name: "AppPreferences",  targets: ["AppPreferences"]),
+        .library(name: "GameDomain",      targets: ["GameDomain"]),
+        .library(name: "DesignSystem",    targets: ["DesignSystem"]),
+        .library(name: "UIComponents",    targets: ["UIComponents"]),
+        .library(name: "GameFeature",     targets: ["GameFeature"]),
+        .library(name: "SettingsFeature", targets: ["SettingsFeature"]),
     ],
     dependencies: [
         .package(
@@ -20,6 +22,13 @@ let package = Package(
         ),
     ],
     targets: [
+        .target(name: "AppPreferences", path: "Sources/AppPreferences"),
+        .testTarget(
+            name: "AppPreferencesTests",
+            dependencies: ["AppPreferences"],
+            path: "Tests/AppPreferencesTests"
+        ),
+
         .target(name: "GameDomain", path: "Sources/GameDomain"),
         .testTarget(
             name: "GameDomainTests",
@@ -57,6 +66,17 @@ let package = Package(
             name: "GameFeatureTests",
             dependencies: ["GameFeature"],
             path: "Tests/GameFeatureTests"
+        ),
+
+        .target(
+            name: "SettingsFeature",
+            dependencies: ["AppPreferences", "DesignSystem", "UIComponents"],
+            path: "Sources/SettingsFeature"
+        ),
+        .testTarget(
+            name: "SettingsFeatureTests",
+            dependencies: ["SettingsFeature"],
+            path: "Tests/SettingsFeatureTests"
         ),
     ]
 )
