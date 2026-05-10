@@ -26,10 +26,21 @@ struct ContentView: View {
                 .toolbar(.hidden, for: .navigationBar)
             }
         }
+        .preferredColorScheme(prefs.theme.preferredColorScheme)
     }
 }
 
 private enum SettingsRoute: Hashable { case settings }
+
+private extension Theme {
+    var preferredColorScheme: ColorScheme? {
+        switch self {
+        case .light:  return .light
+        case .dark:   return .dark
+        case .system: return nil
+        }
+    }
+}
 
 #Preview {
     ContentView()

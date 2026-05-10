@@ -14,7 +14,7 @@ public struct PrimaryPillButton: View {
         Button(action: action) {
             Text(title)
                 .font(DSFont.buttonLabel)
-                .foregroundStyle(.white)
+                .foregroundStyle(DSColor.invertedLabel)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, DSSpacing.lg)
                 .background(
