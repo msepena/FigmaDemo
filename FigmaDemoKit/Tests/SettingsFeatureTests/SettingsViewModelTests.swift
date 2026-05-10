@@ -1,6 +1,15 @@
+import Foundation
 import Testing
 import AppPreferences
 @testable import SettingsFeature
+
+@MainActor
+private func isolatedPrefs() -> AppPreferences {
+    let name = "SettingsViewModelTests.\(UUID().uuidString)"
+    let defaults = UserDefaults(suiteName: name)!
+    defaults.removePersistentDomain(forName: name)
+    return AppPreferences(defaults: defaults)
+}
 
 @MainActor
 @Suite("SettingsViewModel")
@@ -8,7 +17,7 @@ struct SettingsViewModelTests {
     @Test func resetStatsInvokesInjectedClosure() {
         var resetCount = 0
         let vm = SettingsViewModel(
-            prefs: AppPreferences(),
+            prefs: isolatedPrefs(),
             onResetStats: { resetCount += 1 }
         )
 
@@ -19,7 +28,7 @@ struct SettingsViewModelTests {
     }
 
     @Test func mutatingPrefsThroughViewModelIsObservable() {
-        let prefs = AppPreferences()
+        let prefs = isolatedPrefs()
         let vm = SettingsViewModel(prefs: prefs, onResetStats: {})
 
         vm.prefs.difficulty = .hard
