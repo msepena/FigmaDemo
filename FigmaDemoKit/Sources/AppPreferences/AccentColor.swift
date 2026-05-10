@@ -5,9 +5,10 @@ public enum AccentColor: String, Sendable, Hashable, CaseIterable, Codable {
     case orange
     case green
 
-    /// Raw 24-bit RGB hex for each accent. Kept as data on the model so the UI
-    /// layer (which depends on SwiftUI) can map this to a `Color` without
-    /// `AppPreferences` having to import SwiftUI itself.
+    /// Raw 24-bit RGB hex for each accent. The SwiftUI bridge lives in
+    /// `AccentColor+Color.swift` (sibling file) — keeping the hex as plain data
+    /// here means `AppPreferences` consumers that don't render UI (tests,
+    /// future macOS targets) don't pull in SwiftUI.
     public var hex: UInt32 {
         switch self {
         case .blue:   return 0x007AFF

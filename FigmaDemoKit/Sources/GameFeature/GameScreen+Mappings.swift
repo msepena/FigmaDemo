@@ -4,10 +4,11 @@ import DesignSystem
 import UIComponents
 
 extension Player {
-    /// Display tint used for X/O glyphs and accents.
-    var displayColor: Color {
+    /// Display tint used for X/O glyphs and accents. Player X follows the user's
+    /// chosen `accent`; Player O is fixed.
+    func displayColor(accent: Color) -> Color {
         switch self {
-        case .x: return DSColor.playerXBlue
+        case .x: return accent
         case .o: return DSColor.playerOOrange
         }
     }
@@ -37,10 +38,11 @@ public func cellVisualState(for state: GameState, at position: CellPosition) -> 
     }
 }
 
-/// Build the three score columns for the scoreboard from a `Score`.
-public func scoreColumns(for score: Score) -> [ScoreColumn] {
+/// Build the three score columns for the scoreboard from a `Score`. Player X's
+/// column follows the active accent; Player O stays orange.
+public func scoreColumns(for score: Score, accent: Color) -> [ScoreColumn] {
     [
-        .init(label: "Player X", value: "\(score.xWins)", valueColor: DSColor.playerXBlue),
+        .init(label: "Player X", value: "\(score.xWins)", valueColor: accent),
         .init(label: "Draws",    value: "\(score.draws)", valueColor: DSColor.label),
         .init(label: "Player O", value: "\(score.oWins)", valueColor: DSColor.playerOOrange),
     ]
@@ -51,14 +53,26 @@ public func eyebrowText(for state: GameState) -> String {
     "Round \(state.roundNumber)"
 }
 
-/// Tint and text for the turn indicator pill, taking into account terminal outcomes.
-public func turnIndicator(for state: GameState) -> (letter: String, tint: Color, text: String) {
+/// Letter + text for the turn indicator pill, taking into account terminal outcomes.
+/// The tint is *not* computed here because it depends on the active accent — the
+/// View resolves that via `\.dsAccentColor` and combines with this result.
+public func turnIndicatorText(for state: GameState) -> (letter: String, text: String) {
     switch state.outcome {
     case .ongoing:
-        return (state.currentPlayer.glyph, state.currentPlayer.displayColor, "Your turn")
+        return (state.currentPlayer.glyph, "Your turn")
     case .win(let player, _):
-        return (player.glyph, player.displayColor, "Player \(player.glyph) wins")
+        return (player.glyph, "Player \(player.glyph) wins")
     case .draw:
-        return ("=", DSColor.label, "It's a draw")
+        return ("=", "It's a draw")
+    }
+}
+
+/// Tint for the turn indicator pill — accent for X (or X-win), orange for O,
+/// neutral label color for a draw.
+public func turnIndicatorTint(for state: GameState, accent: Color) -> Color {
+    switch state.outcome {
+    case .ongoing:        return state.currentPlayer.displayColor(accent: accent)
+    case .win(let p, _):  return p.displayColor(accent: accent)
+    case .draw:           return DSColor.label
     }
 }
