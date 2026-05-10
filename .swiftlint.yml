@@ -1,0 +1,28 @@
+excluded:
+  - FigmaDemoKit/.build
+  - .build
+  - DerivedData
+
+disabled_rules:
+  # Trailing commas are idiomatic in modern Swift and used throughout this project
+  # for cleaner diffs in multi-line literals.
+  - trailing_comma
+  # The codebase uses intentional vertical alignment of `:`, `,`, and `{`
+  # in design-token / option-array declarations (DSSpacing, GameViewModel,
+  # SettingsScreen+Mappings, Package.swift products).
+  - colon
+  - comma
+  - opening_brace
+  # Option mapping arrays use 3-member tuples ((value, label, …)) — fine here.
+  - large_tuple
+  # FigmaDemoUITestsLaunchTests must override `class var` from XCTestCase.
+  - static_over_final_class
+
+identifier_name:
+  # Allow short, domain-meaningful names: `Player.x`/`.o`, `r`/`g`/`b` (RGB),
+  # `r`/`c` (row/column), `x`/`y` (shadow offsets), `xs`/`sm`/`md`/`lg`/`xl`
+  # (design-system spacing tokens), `bg`, `vm` (view model in tests), `i`,
+  # `p` (CellPosition param). Keep the upper bound and casing checks.
+  min_length:
+    warning: 1
+    error: 1
