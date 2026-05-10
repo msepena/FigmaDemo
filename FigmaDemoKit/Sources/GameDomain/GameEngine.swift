@@ -65,16 +65,15 @@ public struct GameEngine: Sendable {
     }
 
     /// Start a new round, preserving cumulative score and incrementing the round counter.
-    /// The starting player alternates: X starts round 1, O starts round 2, X starts round 3, etc.
-    public func newRound(from state: GameState) -> GameState {
-        let nextRound = state.roundNumber + 1
-        let starter: Player = nextRound.isMultiple(of: 2) ? .o : .x
-        return GameState(
+    /// The caller chooses `starter` — the engine no longer enforces alternation, since
+    /// who plays first is now driven by the user's "First Move" preference.
+    public func newRound(from state: GameState, starter: Player) -> GameState {
+        GameState(
             board: Board(),
             currentPlayer: starter,
             outcome: .ongoing,
             score: state.score,
-            roundNumber: nextRound,
+            roundNumber: state.roundNumber + 1,
             history: []
         )
     }

@@ -9,7 +9,7 @@ public struct GameScreen: View {
     private let onSettingsTap: () -> Void
 
     public init(
-        viewModel: GameViewModel = GameViewModel(),
+        viewModel: GameViewModel,
         onSettingsTap: @escaping () -> Void = {}
     ) {
         _viewModel = State(initialValue: viewModel)

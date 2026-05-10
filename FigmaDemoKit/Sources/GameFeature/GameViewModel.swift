@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import AppPreferences
 import GameDomain
 import UIComponents
 
@@ -7,11 +8,20 @@ import UIComponents
 @MainActor
 public final class GameViewModel {
     public private(set) var state: GameState
+    private let prefs: AppPreferences
     private let engine: GameEngine
 
-    public init(state: GameState = GameState(), engine: GameEngine = GameEngine()) {
-        self.state = state
+    public init(prefs: AppPreferences, engine: GameEngine = GameEngine()) {
+        self.prefs = prefs
         self.engine = engine
+        self.state = GameState(currentPlayer: prefs.firstMove.resolvedStarter())
+    }
+
+    /// Test/preview hook — lets callers seed an arbitrary `GameState`.
+    public init(state: GameState, prefs: AppPreferences, engine: GameEngine = GameEngine()) {
+        self.prefs = prefs
+        self.engine = engine
+        self.state = state
     }
 
     // MARK: - Derived UI props
@@ -36,14 +46,15 @@ public final class GameViewModel {
     }
 
     public func newGame() {
+        let starter = prefs.firstMove.resolvedStarter()
         if state.outcome.isFinished {
             // Round was complete; preserve cumulative score and bump round counter.
-            state = engine.newRound(from: state)
+            state = engine.newRound(from: state, starter: starter)
         } else {
             // Round is still in progress — clear the board and keep score/round.
             state = GameState(
                 board: Board(),
-                currentPlayer: .x,
+                currentPlayer: starter,
                 outcome: .ongoing,
                 score: state.score,
                 roundNumber: state.roundNumber,
@@ -61,6 +72,6 @@ public final class GameViewModel {
     /// Resets cumulative score, round counter, board, and history. Used by
     /// the Settings screen's "Reset Stats" action via an app-level callback.
     public func resetAll() {
-        state = GameState()
+        state = GameState(currentPlayer: prefs.firstMove.resolvedStarter())
     }
 }

@@ -1,8 +1,9 @@
 import SwiftUI
+import AppPreferences
 import GameDomain
 
 #Preview("Empty board") {
-    GameScreen()
+    GameScreen(viewModel: GameViewModel(prefs: AppPreferences()))
 }
 
 #Preview("Mid-game with diagonal X win") {
@@ -18,7 +19,7 @@ import GameDomain
             state = next
         }
     }
-    return GameScreen(viewModel: GameViewModel(state: state, engine: engine))
+    return GameScreen(viewModel: GameViewModel(state: state, prefs: AppPreferences(), engine: engine))
 }
 
 #Preview("Draw") {
@@ -34,5 +35,5 @@ import GameDomain
             state = next
         }
     }
-    return GameScreen(viewModel: GameViewModel(state: state, engine: engine))
+    return GameScreen(viewModel: GameViewModel(state: state, prefs: AppPreferences(), engine: engine))
 }
