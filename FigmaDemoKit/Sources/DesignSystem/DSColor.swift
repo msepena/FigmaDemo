@@ -14,9 +14,9 @@ public enum DSColor {
     public static let secondary = Color.adaptive(light: 0x8E8E93, dark: 0x98989D)
     /// Divider / grid hairline. Light: #D8D8DC / Dark: #3A3A3C.
     public static let gridLine = Color.adaptive(light: 0xD8D8DC, dark: 0x3A3A3C)
-    /// Empty-cell background — sits inside a `cardBackground` to "cut out" of the card.
-    /// Light: #F2F2F7 / Dark: #2C2C2E.
-    public static let emptyCell = Color.adaptive(light: 0xF2F2F7, dark: 0x2C2C2E)
+    /// Empty-cell background — sits inside `cardBackground` with enough contrast to
+    /// read as a distinct tile. Light: #E5E5EA / Dark: #2C2C2E.
+    public static let emptyCell = Color.adaptive(light: 0xE5E5EA, dark: 0x2C2C2E)
     /// Inverse of `label` — used for text that sits on top of a `label`-colored fill
     /// (e.g. the "New Game" pill button). Light: #FFFFFF / Dark: #000000.
     public static let invertedLabel = Color.adaptive(light: 0xFFFFFF, dark: 0x000000)
