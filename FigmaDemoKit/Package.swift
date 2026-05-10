@@ -59,12 +59,12 @@ let package = Package(
 
         .target(
             name: "GameFeature",
-            dependencies: ["GameDomain", "DesignSystem", "UIComponents"],
+            dependencies: ["AppPreferences", "GameDomain", "DesignSystem", "UIComponents"],
             path: "Sources/GameFeature"
         ),
         .testTarget(
             name: "GameFeatureTests",
-            dependencies: ["GameFeature"],
+            dependencies: ["AppPreferences", "GameFeature"],
             path: "Tests/GameFeatureTests"
         ),
 

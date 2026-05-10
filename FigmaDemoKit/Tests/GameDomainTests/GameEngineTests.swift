@@ -102,16 +102,23 @@ struct GameEngineTests {
         #expect(undone.outcome == .ongoing)
     }
 
-    @Test func newRoundPreservesScoreAndAlternatesStarter() {
+    @Test func newRoundPreservesScoreAndUsesProvidedStarter() {
         var state = GameState(score: Score(xWins: 2, oWins: 1, draws: 0))
         state.roundNumber = 3
-        let next = engine.newRound(from: state)
+        let next = engine.newRound(from: state, starter: .o)
         #expect(next.score.xWins == 2)
         #expect(next.score.oWins == 1)
         #expect(next.roundNumber == 4)
-        #expect(next.currentPlayer == .o) // even rounds start as O
+        #expect(next.currentPlayer == .o)
         #expect(next.history.isEmpty)
         #expect(next.outcome == .ongoing)
+    }
+
+    @Test func newRoundHonorsXStarter() {
+        let state = GameState(roundNumber: 2)
+        let next = engine.newRound(from: state, starter: .x)
+        #expect(next.currentPlayer == .x)
+        #expect(next.roundNumber == 3)
     }
 
     @Test func resetClearsEverything() {

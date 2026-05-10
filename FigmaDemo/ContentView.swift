@@ -5,9 +5,15 @@ import GameFeature
 import SettingsFeature
 
 struct ContentView: View {
-    @State private var prefs = AppPreferences()
-    @State private var gameVM = GameViewModel()
+    @State private var prefs: AppPreferences
+    @State private var gameVM: GameViewModel
     @State private var path = NavigationPath()
+
+    init() {
+        let prefs = AppPreferences()
+        _prefs = State(initialValue: prefs)
+        _gameVM = State(initialValue: GameViewModel(prefs: prefs))
+    }
 
     var body: some View {
         NavigationStack(path: $path) {
