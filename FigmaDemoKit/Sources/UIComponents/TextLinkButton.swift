@@ -2,6 +2,7 @@ import SwiftUI
 import DesignSystem
 
 public struct TextLinkButton: View {
+    @Environment(\.dsAccentColor) private var accent
     private let title: String
     private let isEnabled: Bool
     private let action: () -> Void
@@ -16,7 +17,7 @@ public struct TextLinkButton: View {
         Button(action: action) {
             Text(title)
                 .font(DSFont.bodyEmphasized)
-                .foregroundStyle(isEnabled ? DSColor.playerXBlue : DSColor.secondary)
+                .foregroundStyle(isEnabled ? accent : DSColor.secondary)
         }
         .buttonStyle(.plain)
         .disabled(!isEnabled)

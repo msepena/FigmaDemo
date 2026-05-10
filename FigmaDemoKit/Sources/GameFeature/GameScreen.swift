@@ -4,6 +4,7 @@ import DesignSystem
 import UIComponents
 
 public struct GameScreen: View {
+    @Environment(\.dsAccentColor) private var accent
     @State private var viewModel: GameViewModel
     private let onSettingsTap: () -> Void
 
@@ -57,14 +58,15 @@ public struct GameScreen: View {
     }
 
     private var scoreboard: some View {
-        ScoreboardCard(columns: viewModel.scoreColumnsForUI)
+        ScoreboardCard(columns: scoreColumns(for: viewModel.state.score, accent: accent))
     }
 
     private var turnPill: some View {
-        TurnIndicatorPill(
-            letter: viewModel.turnLetter,
-            tint: viewModel.turnTint,
-            text: viewModel.turnText
+        let text = turnIndicatorText(for: viewModel.state)
+        return TurnIndicatorPill(
+            letter: text.letter,
+            tint: turnIndicatorTint(for: viewModel.state, accent: accent),
+            text: text.text
         )
     }
 

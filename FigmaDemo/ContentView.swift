@@ -1,5 +1,6 @@
 import SwiftUI
 import AppPreferences
+import DesignSystem
 import GameFeature
 import SettingsFeature
 
@@ -26,6 +27,7 @@ struct ContentView: View {
                 .toolbar(.hidden, for: .navigationBar)
             }
         }
+        .dsAccentColor(prefs.accentColor.color)
         .preferredColorScheme(prefs.theme.preferredColorScheme)
     }
 }

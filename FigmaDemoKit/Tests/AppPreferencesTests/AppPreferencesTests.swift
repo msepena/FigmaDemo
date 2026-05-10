@@ -17,7 +17,8 @@ struct AppPreferencesTests {
     }
 
     @Test func mutationsPersist() {
-        let prefs = AppPreferences()
+        let suite = makeSuite()
+        let prefs = AppPreferences(defaults: suite)
         prefs.difficulty = .hard
         prefs.firstMove = .random
         prefs.theme = .dark
@@ -32,6 +33,36 @@ struct AppPreferencesTests {
         #expect(!prefs.soundEnabled)
         #expect(!prefs.hapticsEnabled)
     }
+
+    @Test func persistsAcrossInstances() {
+        let suite = makeSuite()
+
+        do {
+            let prefs = AppPreferences(defaults: suite)
+            prefs.difficulty = .hard
+            prefs.firstMove = .random
+            prefs.theme = .dark
+            prefs.accentColor = .pink
+            prefs.soundEnabled = false
+            prefs.hapticsEnabled = false
+        }
+
+        let reloaded = AppPreferences(defaults: suite)
+        #expect(reloaded.difficulty == .hard)
+        #expect(reloaded.firstMove == .random)
+        #expect(reloaded.theme == .dark)
+        #expect(reloaded.accentColor == .pink)
+        #expect(!reloaded.soundEnabled)
+        #expect(!reloaded.hapticsEnabled)
+    }
+}
+
+@MainActor
+private func makeSuite() -> UserDefaults {
+    let name = "AppPreferencesTests.\(UUID().uuidString)"
+    let defaults = UserDefaults(suiteName: name)!
+    defaults.removePersistentDomain(forName: name)
+    return defaults
 }
 
 @Suite("Preference enum encoding")

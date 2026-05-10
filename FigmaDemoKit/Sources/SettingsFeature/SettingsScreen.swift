@@ -4,6 +4,7 @@ import DesignSystem
 import UIComponents
 
 public struct SettingsScreen: View {
+    @Environment(\.dsAccentColor) private var accent
     @State private var viewModel: SettingsViewModel
     private let onBack: () -> Void
 
@@ -96,7 +97,7 @@ public struct SettingsScreen: View {
                     Text("Game")
                         .font(DSFont.bodyEmphasized)
                 }
-                .foregroundStyle(DSColor.playerXBlue)
+                .foregroundStyle(accent)
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("BackToGameButton")

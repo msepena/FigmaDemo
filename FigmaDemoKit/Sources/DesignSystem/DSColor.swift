@@ -23,16 +23,14 @@ public enum DSColor {
 
     // MARK: - Brand / overlay (do NOT adapt)
 
-    /// #007AFF — Player X / accent
+    /// #007AFF — default accent. Runtime accent comes from `\.dsAccentColor` in
+    /// the SwiftUI environment; this constant is the fallback when no accent has
+    /// been injected (default value for the environment key, plus previews).
     public static let playerXBlue = Color(hex: 0x007AFF)
-    /// #FF9500 — Player O
+    /// #FF9500 — Player O (fixed; not driven by the user-selected accent).
     public static let playerOOrange = Color(hex: 0xFF9500)
-    /// 12% blue tint for winning X cells
-    public static let winHighlightBlue = Color(hex: 0x007AFF).opacity(0.12)
-    /// 12% orange tint for winning O cells
+    /// 12% orange tint for winning O cells.
     public static let winHighlightOrange = Color(hex: 0xFF9500).opacity(0.12)
-    /// 12% blue tint for the turn indicator pill
-    public static let turnPillTint = Color(hex: 0x007AFF).opacity(0.12)
     /// #FF3B30 — destructive action label (Reset Stats)
     public static let destructive = Color(hex: 0xFF3B30)
 }

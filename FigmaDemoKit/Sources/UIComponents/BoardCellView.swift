@@ -16,23 +16,24 @@ public enum CellVisualState: Sendable, Hashable {
         }
     }
 
-    public var glyphColor: Color {
+    public func glyphColor(accent: Color) -> Color {
         switch self {
-        case .empty, .x, .xWinning: return DSColor.playerXBlue
+        case .empty, .x, .xWinning: return accent
         case .o, .oWinning: return DSColor.playerOOrange
         }
     }
 
-    public var background: Color {
+    public func background(accent: Color) -> Color {
         switch self {
         case .empty, .x, .o: return DSColor.emptyCell
-        case .xWinning: return DSColor.winHighlightBlue
+        case .xWinning: return accent.opacity(0.12)
         case .oWinning: return DSColor.winHighlightOrange
         }
     }
 }
 
 public struct BoardCellView: View {
+    @Environment(\.dsAccentColor) private var accent
     private let state: CellVisualState
     private let action: () -> Void
 
@@ -45,11 +46,11 @@ public struct BoardCellView: View {
         Button(action: action) {
             ZStack {
                 RoundedRectangle(cornerRadius: DSRadius.cell)
-                    .fill(state.background)
+                    .fill(state.background(accent: accent))
                 if let glyph = state.glyph {
                     Text(glyph)
                         .font(DSFont.markGlyph)
-                        .foregroundStyle(state.glyphColor)
+                        .foregroundStyle(state.glyphColor(accent: accent))
                 }
             }
             .aspectRatio(1, contentMode: .fit)

@@ -1,6 +1,5 @@
 import Foundation
 import Observation
-import SwiftUI
 import GameDomain
 import UIComponents
 
@@ -19,11 +18,8 @@ public final class GameViewModel {
 
     public var headerEyebrow: String { eyebrowText(for: state) }
 
-    public var scoreColumnsForUI: [ScoreColumn] { scoreColumns(for: state.score) }
-
-    public var turnLetter: String  { turnIndicator(for: state).letter }
-    public var turnTint:   Color   { turnIndicator(for: state).tint }
-    public var turnText:   String  { turnIndicator(for: state).text }
+    public var turnLetter: String { turnIndicatorText(for: state).letter }
+    public var turnText: String   { turnIndicatorText(for: state).text }
 
     public var canUndo: Bool { !state.history.isEmpty }
 
