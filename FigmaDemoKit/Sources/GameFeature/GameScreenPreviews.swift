@@ -2,11 +2,13 @@ import SwiftUI
 import AppPreferences
 import GameDomain
 
-#Preview("Empty board") {
-    GameScreen(viewModel: GameViewModel(prefs: AppPreferences()))
+@MainActor
+private func emptyVM() -> GameViewModel {
+    GameViewModel(prefs: AppPreferences())
 }
 
-#Preview("Mid-game with diagonal X win") {
+@MainActor
+private func midGameVM() -> GameViewModel {
     let engine = GameEngine()
     var state = GameState()
     let plays: [(Int, Int)] = [
@@ -19,10 +21,11 @@ import GameDomain
             state = next
         }
     }
-    return GameScreen(viewModel: GameViewModel(state: state, prefs: AppPreferences(), engine: engine))
+    return GameViewModel(state: state, prefs: AppPreferences(), engine: engine)
 }
 
-#Preview("Draw") {
+@MainActor
+private func drawVM() -> GameViewModel {
     let engine = GameEngine()
     var state = GameState()
     let plays: [(Int, Int)] = [
@@ -35,5 +38,17 @@ import GameDomain
             state = next
         }
     }
-    return GameScreen(viewModel: GameViewModel(state: state, prefs: AppPreferences(), engine: engine))
+    return GameViewModel(state: state, prefs: AppPreferences(), engine: engine)
+}
+
+#Preview("Empty board") {
+    GameScreen(viewModel: emptyVM())
+}
+
+#Preview("Mid-game with diagonal X win") {
+    GameScreen(viewModel: midGameVM())
+}
+
+#Preview("Draw") {
+    GameScreen(viewModel: drawVM())
 }
