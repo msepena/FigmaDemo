@@ -1,10 +1,10 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository. The project's user-facing intro lives in [`README.md`](README.md) — keep them in sync when you change something visible there (build commands, module list, requirements).
 
 ## Project
 
-SwiftUI iOS app: a tic-tac-toe game with a Settings screen. Bundle id `com.test.FigmaDemo`, universal (iPhone + iPad), Swift 5.0 (app target) / Swift 6.0 tools (package), **iOS deployment target 26.4** (set deliberately — do not lower it without asking).
+SwiftUI iOS app: a tic-tac-toe game with a Settings screen. Display name "Tic Tac Toe Game", bundle id `com.test.TicTacToeGame`, universal (iPhone + iPad), Swift 5.0 (app target) / Swift 6.0 tools (package), **iOS deployment target 26.4** (set deliberately — do not lower it without asking). The Xcode project, schemes, folders, and modules are still named `FigmaDemo` / `FigmaDemoKit`; only the product's display name and bundle id were renamed.
 
 The app entry point is `FigmaDemoApp` → `ContentView`, which owns an `AppPreferences` and a `GameViewModel` and drives a `NavigationStack` between `GameScreen` and `SettingsScreen` (both come from `FigmaDemoKit`).
 
