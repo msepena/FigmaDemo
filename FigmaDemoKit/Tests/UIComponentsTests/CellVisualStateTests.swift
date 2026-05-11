@@ -1,19 +1,19 @@
 import Testing
 @testable import UIComponents
 
-@Suite("CellVisualState glyph mapping")
+@Suite("CellVisualState mark mapping")
 struct CellVisualStateTests {
-    @Test func emptyHasNoGlyph() {
-        #expect(CellVisualState.empty.glyph == nil)
+    @Test func emptyHasNoMark() {
+        #expect(CellVisualState.empty.markSide == nil)
     }
 
-    @Test func xVariantsRenderX() {
-        #expect(CellVisualState.x.glyph == "X")
-        #expect(CellVisualState.xWinning.glyph == "X")
+    @Test func xVariantsMapToX() {
+        #expect(CellVisualState.x.markSide == .x)
+        #expect(CellVisualState.xWinning.markSide == .x)
     }
 
-    @Test func oVariantsRenderO() {
-        #expect(CellVisualState.o.glyph == "O")
-        #expect(CellVisualState.oWinning.glyph == "O")
+    @Test func oVariantsMapToO() {
+        #expect(CellVisualState.o.markSide == .o)
+        #expect(CellVisualState.oWinning.markSide == .o)
     }
 }

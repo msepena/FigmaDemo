@@ -27,6 +27,7 @@ final class FigmaDemoUITests: XCTestCase {
     @MainActor
     func testTappingTopLeftCellPlacesAnX() throws {
         let app = XCUIApplication()
+        app.launchArguments += ["-DisableSplash"]
         app.launch()
 
         let topLeftCell = app.buttons["Cell-0-0"]
@@ -55,6 +56,7 @@ final class FigmaDemoUITests: XCTestCase {
     @MainActor
     func testTappingSettingsButtonOpensSettingsScreen() throws {
         let app = XCUIApplication()
+        app.launchArguments += ["-DisableSplash"]
         app.launch()
 
         let settingsButton = app.buttons["SettingsButton"]

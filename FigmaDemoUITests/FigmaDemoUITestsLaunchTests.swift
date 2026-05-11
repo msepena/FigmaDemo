@@ -20,6 +20,7 @@ final class FigmaDemoUITestsLaunchTests: XCTestCase {
     @MainActor
     func testLaunch() throws {
         let app = XCUIApplication()
+        app.launchArguments += ["-DisableSplash"]
         app.launch()
 
         // Insert steps here to perform after app launch but before taking a screenshot,

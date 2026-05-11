@@ -51,3 +51,13 @@ The app target is thin — it owns an `AppPreferences` and a `GameViewModel`, th
 | `SettingsFeature` | `SettingsScreen`, `SettingsViewModel` |
 
 See `CLAUDE.md` for deeper notes on layering and conventions.
+
+### Brand assets
+
+The app icon (light / dark / tinted) and the static launch logo are PNGs rendered by a small Swift CLI under `Tools/AssetGen/`. To regenerate after a palette or composition change:
+
+```bash
+swift run --package-path Tools/AssetGen AssetGen
+```
+
+Outputs land in `FigmaDemo/Assets.xcassets/AppIcon.appiconset/` and `…/LaunchLogo.imageset/`. The launch logo is intentionally rendered without the X/O marks — the SwiftUI `BrandSplashView` shown on app start animates them in over an otherwise-identical card.

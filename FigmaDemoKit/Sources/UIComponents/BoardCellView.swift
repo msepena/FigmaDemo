@@ -8,18 +8,11 @@ public enum CellVisualState: Sendable, Hashable {
     case xWinning
     case oWinning
 
-    public var glyph: String? {
+    public var markSide: MarkGlyph.Side? {
         switch self {
         case .empty: return nil
-        case .x, .xWinning: return "X"
-        case .o, .oWinning: return "O"
-        }
-    }
-
-    public func glyphColor(accent: Color) -> Color {
-        switch self {
-        case .empty, .x, .xWinning: return accent
-        case .o, .oWinning: return DSColor.playerOOrange
+        case .x, .xWinning: return .x
+        case .o, .oWinning: return .o
         }
     }
 
@@ -47,16 +40,14 @@ public struct BoardCellView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: DSRadius.cell)
                     .fill(state.background(accent: accent))
-                if let glyph = state.glyph {
-                    Text(glyph)
-                        .font(DSFont.markGlyph)
-                        .foregroundStyle(state.glyphColor(accent: accent))
+                if let side = state.markSide {
+                    MarkGlyph(side: side)
                 }
             }
             .aspectRatio(1, contentMode: .fit)
         }
         .buttonStyle(.plain)
-        .disabled(state.glyph != nil)
+        .disabled(state.markSide != nil)
     }
 }
 
