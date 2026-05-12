@@ -1,10 +1,10 @@
-# Tic Tac Toe Game
+# Tic Tac Toe
 
 A SwiftUI tic-tac-toe iOS app with configurable themes, accent colors, marker styles, first-move preference, and three AI difficulties.
 
-Bundle id: `com.test.TicTacToeGame` · Display name: **Tic Tac Toe Game** · iOS deployment target: **26.4** · Universal (iPhone + iPad).
+Bundle id: `com.test.TicTacToeGame` · Display name: **Tic Tac Toe** · iOS deployment target: **26.4** · Universal (iPhone + iPad).
 
-> The Xcode project, schemes, and folders are still named `FigmaDemo` / `FigmaDemoKit` — only the product's user-facing name and bundle identifier are "Tic Tac Toe Game".
+> The Xcode project, schemes, and folders are still named `FigmaDemo` / `FigmaDemoKit` — only the product's user-facing name and bundle identifier are renamed.
 
 ## Requirements
 
