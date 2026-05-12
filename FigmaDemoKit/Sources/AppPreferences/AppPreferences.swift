@@ -19,12 +19,6 @@ public final class AppPreferences {
     public var markerStyle: MarkerStyle {
         didSet { defaults.set(markerStyle.rawValue, forKey: Keys.markerStyle) }
     }
-    public var soundEnabled: Bool {
-        didSet { defaults.set(soundEnabled, forKey: Keys.soundEnabled) }
-    }
-    public var hapticsEnabled: Bool {
-        didSet { defaults.set(hapticsEnabled, forKey: Keys.hapticsEnabled) }
-    }
 
     @ObservationIgnored
     private let defaults: UserDefaults
@@ -36,8 +30,6 @@ public final class AppPreferences {
         self.theme = Self.read(defaults, Keys.theme, fallback: .system)
         self.accentColor = Self.read(defaults, Keys.accentColor, fallback: .blue)
         self.markerStyle = Self.read(defaults, Keys.markerStyle, fallback: .rounded)
-        self.soundEnabled = defaults.object(forKey: Keys.soundEnabled) as? Bool ?? true
-        self.hapticsEnabled = defaults.object(forKey: Keys.hapticsEnabled) as? Bool ?? true
     }
 
     private static func read<T: RawRepresentable>(
@@ -57,7 +49,5 @@ public final class AppPreferences {
         static let theme         = "AppPreferences.theme"
         static let accentColor   = "AppPreferences.accentColor"
         static let markerStyle   = "AppPreferences.markerStyle"
-        static let soundEnabled  = "AppPreferences.soundEnabled"
-        static let hapticsEnabled = "AppPreferences.hapticsEnabled"
     }
 }

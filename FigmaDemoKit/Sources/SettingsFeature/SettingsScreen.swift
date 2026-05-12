@@ -67,16 +67,6 @@ public struct SettingsScreen: View {
                     }
                 }
 
-                section(eyebrow: "Audio & Haptics") {
-                    SettingsCard {
-                        ToggleRow(title: "Sound Effects", isOn: $prefs.soundEnabled)
-                            .accessibilityIdentifier("SoundEffectsToggle")
-                        SettingsCardDivider()
-                        ToggleRow(title: "Haptic Feedback", isOn: $prefs.hapticsEnabled)
-                            .accessibilityIdentifier("HapticsToggle")
-                    }
-                }
-
                 resetStatsCard
             }
             .padding(.horizontal, DSSpacing.lg)

@@ -28,20 +28,6 @@ final class SettingsAtomsSnapshotTests: XCTestCase {
         assertSnapshot(of: view, as: .image(layout: .sizeThatFits))
     }
 
-    func test_toggleRow_on() {
-        let view = ToggleRow(title: "Sound Effects", isOn: .constant(true))
-            .frame(width: cardWidth)
-
-        assertSnapshot(of: view, as: .image(layout: .fixed(width: cardWidth, height: 53)))
-    }
-
-    func test_toggleRow_off() {
-        let view = ToggleRow(title: "Haptic Feedback", isOn: .constant(false))
-            .frame(width: cardWidth)
-
-        assertSnapshot(of: view, as: .image(layout: .fixed(width: cardWidth, height: 53)))
-    }
-
     func test_disclosureValueRow() {
         let view = DisclosureValueRow(title: "Marker Style", value: "Rounded") {}
             .frame(width: cardWidth)
