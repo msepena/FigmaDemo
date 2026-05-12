@@ -6,6 +6,14 @@ Bundle id: `com.test.TicTacToeGame` · Display name: **Tic Tac Toe** · iOS depl
 
 > The Xcode project, schemes, and folders are still named `FigmaDemo` / `FigmaDemoKit` — only the product's user-facing name and bundle identifier are renamed.
 
+## Screenshots
+
+| Splash | Home | Settings |
+| --- | --- | --- |
+| ![Splash](docs/screenshots/splash.png) | ![Home](docs/screenshots/home.png) | ![Settings](docs/screenshots/settings.png) |
+
+Captured on iPhone 17 Pro (iOS 26.4).
+
 ## Requirements
 
 - macOS with Xcode 26 (Swift 6.0 tools, Swift 5.0 language mode for the app target)
