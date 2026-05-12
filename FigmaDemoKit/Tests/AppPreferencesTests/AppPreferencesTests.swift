@@ -12,8 +12,6 @@ struct AppPreferencesTests {
         #expect(prefs.theme == .system)
         #expect(prefs.accentColor == .blue)
         #expect(prefs.markerStyle == .rounded)
-        #expect(prefs.soundEnabled)
-        #expect(prefs.hapticsEnabled)
     }
 
     @Test func mutationsPersist() {
@@ -23,15 +21,11 @@ struct AppPreferencesTests {
         prefs.firstMove = .random
         prefs.theme = .dark
         prefs.accentColor = .orange
-        prefs.soundEnabled = false
-        prefs.hapticsEnabled = false
 
         #expect(prefs.difficulty == .hard)
         #expect(prefs.firstMove == .random)
         #expect(prefs.theme == .dark)
         #expect(prefs.accentColor == .orange)
-        #expect(!prefs.soundEnabled)
-        #expect(!prefs.hapticsEnabled)
     }
 
     @Test func persistsAcrossInstances() {
@@ -43,8 +37,6 @@ struct AppPreferencesTests {
             prefs.firstMove = .random
             prefs.theme = .dark
             prefs.accentColor = .pink
-            prefs.soundEnabled = false
-            prefs.hapticsEnabled = false
         }
 
         let reloaded = AppPreferences(defaults: suite)
@@ -52,8 +44,6 @@ struct AppPreferencesTests {
         #expect(reloaded.firstMove == .random)
         #expect(reloaded.theme == .dark)
         #expect(reloaded.accentColor == .pink)
-        #expect(!reloaded.soundEnabled)
-        #expect(!reloaded.hapticsEnabled)
     }
 }
 
