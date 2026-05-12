@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // .tool_response.filePath // empty' | { read -r f; case \"$f\" in *FigmaDemoKit/Sources/*|*FigmaDemoKit/Tests/*|*FigmaDemoKit/Package.swift|*FigmaDemoKit/Package.resolved) jq -nc --arg f \"$f\" '{hookSpecificOutput: {hookEventName: \"PostToolUse\", additionalContext: (\"FigmaDemoKit module changed (\" + $f + \"). Review CLAUDE.md and README.md and update if the module list, architecture, build/test commands, or anything user-facing in those docs has drifted from the change.\")}}' ;; esac; }"
+          }
+        ]
+      }
+    ]
+  }
+}
